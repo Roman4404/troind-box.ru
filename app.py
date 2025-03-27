@@ -49,24 +49,27 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        if form.password.data != form.password_again.data:
-            return flask.render_template('register.html', form=form,
-                                   message="Пароли не совпадают")
-        db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form.email.data).first():
-            return flask.render_template('register.html', form=form,
-                                   message="Такой пользователь уже есть")
-        user = User(
-            name=form.name.data,
-            email=form.email.data,
-        )
-        user.set_password(form.password.data)
-        db_sess.add(user)
-        db_sess.commit()
-        return flask.redirect(f'/profile/{user.name}')
-    return flask.render_template('register.html', form=form)
+    if not current_user.is_authenticated:
+        form = RegisterForm()
+        if form.validate_on_submit():
+            if form.password.data != form.password_again.data:
+                return flask.render_template('register.html', form=form,
+                                       message="Пароли не совпадают")
+            db_sess = db_session.create_session()
+            if db_sess.query(User).filter(User.email == form.email.data).first():
+                return flask.render_template('register.html', form=form,
+                                       message="Такой пользователь уже есть")
+            user = User(
+                name=form.name.data,
+                email=form.email.data,
+            )
+            user.set_password(form.password.data)
+            db_sess.add(user)
+            db_sess.commit()
+            return flask.redirect(f'/profile/{user.name}')
+        return flask.render_template('register.html', form=form)
+    else:
+        return flask.redirect(f'/profile/{current_user.name}')
 
 
 @app.route('/profile/<name>')
@@ -90,6 +93,9 @@ def profile_view(name):
         return flask.redirect('/login')
 
 
+@app.route('/russian_memory')
+def Russian_Memory_view():
+    return flask.render_template('russian_memory_view.html')
 
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
