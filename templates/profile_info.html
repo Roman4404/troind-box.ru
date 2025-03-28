@@ -15,11 +15,15 @@
 </style>
 </head>
 <body>
+{% extends "navbar.html" %}
+
+{% block content %}
 <div class="welcome-text">
     <h1>Welcome, {{name}}</h1>
     {% if current_user.is_authenticated %}
     <button type="button" class="btn btn-outline-dark me-2" onclick="window.location='/logout'" style="margin:25px">Выйти</button>
     {% endif %}
 </div>
+{% endblock %}
 </body>
 </html>
