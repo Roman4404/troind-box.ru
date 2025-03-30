@@ -15,10 +15,14 @@
     </style>
 </head>
 <body>
+{% extends "navbar.html" %}
+
+{% block content %}
 <div class="welcome-text">
     <h1>Russian Memory</h1>
     <h2>Страница в разработке</h2>
     <button type="button" class="btn btn-success" onclick="window.location='/'" style="margin:25px">На главную</button>
+{% endblock %}
 </div>
 </body>
 </html>

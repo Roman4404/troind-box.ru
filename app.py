@@ -97,6 +97,12 @@ def profile_view(name):
 def Russian_Memory_view():
     return flask.render_template('russian_memory_view.html')
 
+
+@app.route('/ai_platform')
+def ai_platform():
+    return flask.render_template('PFAI/home_PFAI.html')
+
+
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
     app.run()
