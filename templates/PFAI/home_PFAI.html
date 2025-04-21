@@ -16,73 +16,105 @@
     </style>
 </head>
 <body>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: 930px">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi pe-none me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-        <span class="fs-4">PFAI</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#home"></use>
-                </svg>
-                New chat
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#speedometer2"></use>
-                </svg>
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#table"></use>
-                </svg>
-                Orders
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#grid"></use>
-                </svg>
-                Products
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#people-circle"></use>
-                </svg>
-                Customers
-            </a>
-        </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-           data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>mdo</strong>
+<div style="display: flex; height: 100vh; width: calc(100vw - 480px);">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: auto">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi pe-none me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">PFAI</span>
         </a>
-        <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#home"></use>
+                    </svg>
+                    New chat
+                </a>
             </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li>
+                <a href="#" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#table"></use>
+                    </svg>
+                    Orders
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#grid"></use>
+                    </svg>
+                    Products
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#people-circle"></use>
+                    </svg>
+                    Customers
+                </a>
+            </li>
         </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
     </div>
+    <form style="display: flex" method="post">
+        <div style="margin-left: 100px; margin-top: 350px">
+            <h1>PFAI</h1>
+            <h3>You're Ai:</h3>
+            <div class="input-group mb-3">
+                <select class="form-select" id="inputGroupSelect01" name="ai" style="width: 200px">
+                    <option selected="">Choose...</option>
+                    <option value="YandexGPT-lite">YandexGPT Lite</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-left: 20px; margin-top: 407px; width: 500px; height: 200px">
+            <h3>You're API key:</h3>
+            <div style="width: 480px" class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">API key</span>
+                <input type="text" class="form-control" name="api" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <div style="margin-top: 407px; width: 500px; height: 200px">
+            <h3>You're Folder ID(optional):</h3>
+            <div style="width: 480px" class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Folder ID</span>
+                <input type="text" class="form-control" name="folder_id" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <div style="margin-top: 500px; width: 500px; height: 200px">
+            <button type="submit" class="btn btn-primary">Запустить новый чат -></button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

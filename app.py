@@ -8,8 +8,11 @@ from data.news import News
 from data.users import User
 from data import db_session
 
+from Ai_models.yandexgpt import test_requst
+
 
 app = flask.Flask(__name__)
+db_session.global_init("db/users.db")
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -100,8 +103,19 @@ def Russian_Memory_view():
 
 @app.route('/ai_platform')
 def ai_platform():
-    return flask.render_template('PFAI/home_PFAI.html')
+    return flask.redirect('/pfai')
 
+@app.route('/pfai/new_chat', methods=['POST', 'GET'])
+def pfai_new_caht():
+    if flask.request.method == 'GET':
+        return flask.render_template('PFAI/home_PFAI.html')
+    elif flask.request.method == 'POST':
+        if flask.request.form['ai'] == 'YandexGPT-lite':
+            return flask.render_template('PFAI/chat_prew.html', answer=test_requst(flask.request.form['api'], flask.request.form['folder_id']))
+
+@app.route('/pfai')
+def pfai():
+    return flask.redirect('/pfai/new_chat')
 
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
