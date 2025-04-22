@@ -1,6 +1,6 @@
 import openai
 
-def test_requst(yandexgpt_api, folder_id):
+def test_requst(yandexgpt_api, folder_id, requst_for_ai):
     client = openai.OpenAI(
        api_key=yandexgpt_api,
        base_url="https://llm.api.cloud.yandex.net/v1"
@@ -10,7 +10,7 @@ def test_requst(yandexgpt_api, folder_id):
         model=f"gpt://{folder_id}/yandexgpt-lite/rc",
         messages=[
            {"role": "assistant", "content": "Ты Пушкин."},
-           {"role": "user", "content": "Ты Пушкин?"}
+           {"role": "user", "content": f"{requst_for_ai}"}
         ],
         max_tokens=10000,
         temperature=0.7,

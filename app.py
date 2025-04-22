@@ -111,12 +111,21 @@ def pfai_new_caht():
         return flask.render_template('PFAI/home_PFAI.html')
     elif flask.request.method == 'POST':
         if flask.request.form['ai'] == 'YandexGPT-lite':
-            return flask.render_template('PFAI/chat_prew.html', answer=test_requst(flask.request.form['api'], flask.request.form['folder_id']))
+            return flask.redirect('/pfai/chat')
 
 @app.route('/pfai')
 def pfai():
     return flask.redirect('/pfai/new_chat')
 
+
+@app.route('/pfai/chat', methods=['POST', 'GET'])
+def pfai_chat():
+    if flask.request.method == 'GET':
+        return flask.render_template('PFAI/chat_prew.html', ai_name='YandexGPT Lite')
+    elif flask.request.method == 'POST':
+        return flask.render_template('PFAI/chat_prew.html',
+                                     answer="Ламинат подойдет для укладке на кухне или в детской", #test_requst(api_key, id_forder, flask.request.form['reqst_text'])
+                                     ai_name='YandexGPT Lite')
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
     app.run()
