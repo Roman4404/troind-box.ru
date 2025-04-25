@@ -121,7 +121,7 @@ def pfai():
 @app.route('/pfai/chat', methods=['POST', 'GET'])
 def pfai_chat():
     if flask.request.method == 'GET':
-        return flask.render_template('PFAI/chat_prew.html', ai_name='YandexGPT Lite')
+        return flask.render_template('PFAI/chat_prew.html', ai_name='YandexGPT Lite', first_quens=True)
     elif flask.request.method == 'POST':
         return flask.render_template('PFAI/chat_prew.html',
                                      answer="Ламинат подойдет для укладке на кухне или в детской", #test_requst(api_key, id_forder, flask.request.form['reqst_text'])

@@ -14,6 +14,13 @@
             padding: 0;
         }
 
+        .centered-box_first {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .centered-box {
             display: flex;
             justify-content: center;
@@ -24,42 +31,28 @@
         .content {
             width: 500px;
             padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
-        .chat-for-answer {
-            width: 2500px;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typewriter 1s steps(13);
-            border-right: 5px solid white;
-        }
-
-        @keyframes typewriter {
-            from {
-                width: 0%;
-            }
-
-            to {
-                width: 100%;
-            }
-        }
-
     </style>
 </head>
 <body>
 <div>
-    <div class="chat-for-answer">
-        <h2>{{ answer }}</h2>
+    <h2>{{ answer }}</h2>
+    {% if first_quens %}
+    <div class="centered-box_first">
+        <div class="content">
+            <form method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="reqst_text" class="form-control"
+                           placeholder="Запрос в {{ ai_name }}..."
+                           aria-label="Recipient's username"
+                           aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Send ^</button>
+                </div>
+            </form>
+        </div>
     </div>
+    {% else %}
     <div style="position: fixed; bottom: 0; width: 100%;">
         <div class="centered-box">
             <div class="content">
@@ -74,6 +67,7 @@
                 </form>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 </body>
