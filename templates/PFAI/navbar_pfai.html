@@ -14,10 +14,11 @@
             padding: 0;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div style="display: flex; height: 100vh; width: 280px;">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: auto">
+
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: auto">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
@@ -27,7 +28,7 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="/pfai/new_chat" class="nav-link link-body-emphasis" aria-current="page">
+                <a href="#" class="nav-link active" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#home"></use>
                     </svg>
@@ -35,11 +36,11 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link link-body-emphasis">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"></use>
                     </svg>
-                    Chats
+                    Dashboard
                 </a>
             </li>
             <li>
@@ -47,7 +48,7 @@
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#table"></use>
                     </svg>
-                    Dashboard
+                    Orders
                 </a>
             </li>
             <li>
@@ -86,6 +87,5 @@
             </ul>
         </div>
     </div>
-</div>
 </body>
 </html>

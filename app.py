@@ -126,6 +126,11 @@ def pfai_chat():
         return flask.render_template('PFAI/chat_prew.html',
                                      answer="Ламинат подойдет для укладке на кухне или в детской", #test_requst(api_key, id_forder, flask.request.form['reqst_text'])
                                      ai_name='YandexGPT Lite')
+
+
+@app.errorhandler(404)
+def error404(error):
+    return flask.render_template('error404.html')
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
     app.run()
