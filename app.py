@@ -86,7 +86,7 @@ def profile_view(name):
                     find_user = True
                     break
             if find_user:
-                return flask.render_template('profile_info.html', name=name)
+                return flask.render_template('profile_info.html', name=name, count_tokens=user.count_tokes)
             else:
                 return flask.render_template('error404.html')
         else:

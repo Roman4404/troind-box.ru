@@ -15,6 +15,8 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    api_keys_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('api_keys.id'))
+    count_tokes = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 
     def __repr__(self):

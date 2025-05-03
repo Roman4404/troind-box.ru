@@ -23,8 +23,9 @@
     {% if current_user.is_authenticated %}
         <div style="display: flex">
             <h2>Кол-во токенов PFAI:</h2>
-            <h2>0</h2>
+            <h2>{{ count_tokens }}</h2>
         </div>
+        <button type="button" class="btn btn-warning" style="margin:25px" onclick="window.location='/pop'">Пополнение токенов PFAI</button>
         <button type="button" class="btn btn-outline-dark me-2" onclick="window.location='/logout'" style="margin:25px">Выйти</button>
     {% endif %}
 </div>
