@@ -2,10 +2,9 @@ import flask
 import os
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
-from forms.news import NewsForm
 from forms.user import RegisterForm, LoginForm
-from data.news import News
 from data.users import User
+from data.chats import Chats
 from data import db_session
 
 from Ai_models.yandexgpt import test_requst
@@ -106,16 +105,19 @@ def ai_platform():
     return flask.redirect('/pfai')
 
 @app.route('/pfai/new_chat', methods=['POST', 'GET'])
-def pfai_new_caht():
+def pfai_new_chat():
     if flask.request.method == 'GET':
-        return flask.render_template('PFAI/home_PFAI.html')
+        if current_user.is_authenticated:
+            return flask.render_template('PFAI/new_chat_pfai.html')
+        else:
+            return flask.redirect('/login')
     elif flask.request.method == 'POST':
         if flask.request.form['ai'] == 'YandexGPT-lite':
             return flask.redirect('/pfai/chat')
 
 @app.route('/pfai')
 def pfai():
-    return flask.redirect('/pfai/new_chat')
+    return flask.render_template('PFAI/home_pfai.html')
 
 
 @app.route('/pfai/chat', methods=['POST', 'GET'])
@@ -128,9 +130,16 @@ def pfai_chat():
                                      ai_name='YandexGPT Lite')
 
 
+@app.route('/test')
+def bsbsbsb():
+    return flask.render_template('PFAI/test.html')
+
 @app.errorhandler(404)
 def error404(error):
     return flask.render_template('error404.html')
+
+
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
     app.run()
+

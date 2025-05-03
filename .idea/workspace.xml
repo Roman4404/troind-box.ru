@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Добавил тестовый чат PFAI">
+    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Добавил анимацию печати">
+      <change afterPath="$PROJECT_DIR$/data/chats.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/PFAI/home_pfai.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/PFAI/need_login_for_pfai.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/PFAI/new_chat_pfai.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/__all_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__all_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/PFAI/home_PFAI.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile_info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +29,8 @@
       <list>
         <option value="Flask Main" />
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -106,7 +116,7 @@
     <configuration name="home_PFAI.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/home_PFAI.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="navbar_pfai.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/navbar_pfai.html" useBuiltInWebServerPort="true">
+    <configuration name="test.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/test.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -170,18 +180,18 @@
     <list>
       <item itemvalue="Flask server.Ai_site" />
       <item itemvalue="Flask server.Flask (app.py)" />
+      <item itemvalue="JavaScript Debug.test.html" />
       <item itemvalue="JavaScript Debug.chat_prew.html" />
-      <item itemvalue="JavaScript Debug.navbar_pfai.html" />
       <item itemvalue="JavaScript Debug.home_PFAI.html" />
       <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Flask server.Flask (app.py)" />
+        <item itemvalue="JavaScript Debug.home_PFAI.html" />
+        <item itemvalue="JavaScript Debug.test.html" />
         <item itemvalue="Python.main" />
         <item itemvalue="JavaScript Debug.chat_prew.html" />
-        <item itemvalue="JavaScript Debug.home_PFAI.html" />
-        <item itemvalue="JavaScript Debug.navbar_pfai.html" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +230,14 @@
       <workItem from="1744385865649" duration="4000" />
       <workItem from="1745232859145" duration="9565000" />
       <workItem from="1745304911860" duration="690000" />
-      <workItem from="1745310708138" duration="7877000" />
+      <workItem from="1745310708138" duration="8390000" />
+      <workItem from="1745565059821" duration="9000" />
+      <workItem from="1746011633877" duration="121000" />
+      <workItem from="1746071644298" duration="2697000" />
+      <workItem from="1746192522075" duration="7864000" />
+      <workItem from="1746201126937" duration="714000" />
+      <workItem from="1746242935180" duration="1583000" />
+      <workItem from="1746244534309" duration="2305000" />
     </task>
     <task id="LOCAL-00001" summary="Add home and Yandex Music widget">
       <option name="closed" value="true" />
@@ -262,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745316931186</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавил анимацию печати">
+      <option name="closed" value="true" />
+      <created>1745318759108</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745318759108</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,10 +342,11 @@
     <MESSAGE value="Update login_form.html" />
     <MESSAGE value="add yandexgpt" />
     <MESSAGE value="Добавил тестовый чат PFAI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил тестовый чат PFAI" />
+    <MESSAGE value="Добавил анимацию печати" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил анимацию печати" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1745318449959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1746246828294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ai_site$yandexgpt.coverage" NAME="yandexgpt Coverage Results" MODIFIED="1745238886746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1742463273930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/a7f8e6fe-800f-4b2e-8727-54e3a7d5a36d_solution.zip.36d/2_task" />
     <SUITE FILE_PATH="coverage/Ai_site$users.coverage" NAME="users Coverage Results" MODIFIED="1743344844714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
