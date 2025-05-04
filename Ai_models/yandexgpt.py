@@ -1,16 +1,17 @@
 import openai
+from Ai_models.keys.ai import YandexGPT_Lite_API, YandexGPT_Lite_Folder_ID
 
-def test_requst(yandexgpt_api, folder_id, requst_for_ai):
+def yandexgptlite_requst(system_context, user_context, mex_tokens, temperature):
     client = openai.OpenAI(
-       api_key=yandexgpt_api,
+       api_key=YandexGPT_Lite_API,
        base_url="https://llm.api.cloud.yandex.net/v1"
     )
 
     response = client.chat.completions.create(
-        model=f"gpt://{folder_id}/yandexgpt-lite/rc",
+        model=f"gpt://{YandexGPT_Lite_Folder_ID}/yandexgpt-lite/rc",
         messages=[
-           {"role": "assistant", "content": "Ты Пушкин."},
-           {"role": "user", "content": f"{requst_for_ai}"}
+           {"role": "assistant", "content": f"{system_context}"},
+           {"role": "user", "content": f"{user_context}"}
         ],
         max_tokens=10000,
         temperature=0.7,

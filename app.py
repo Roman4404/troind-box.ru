@@ -7,7 +7,7 @@ from data.users import User
 from data.chats import Chats
 from data import db_session
 
-from Ai_models.yandexgpt import test_requst
+from Ai_models.yandexgpt import yandexgptlite_requst
 
 
 app = flask.Flask(__name__)
