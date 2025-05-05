@@ -3,6 +3,7 @@ import openai
 
 from pydantic import BaseModel
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 from Ai_models.count_tokens_wtf import count_tokens
 from data import db_session
@@ -64,11 +65,23 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     db_sess.commit()
                     return {"message": final_message}
                 else:
-                    return {"error": "Invalid Ai models"}
+                    return JSONResponse(
+                        status_code=400,
+                        content={"message": "Invalid Ai models"},
+                    )
             else:
-                return {"error": system_context}
+                return JSONResponse(
+                    status_code=400,
+                    content={"message": system_context},
+                )
         else:
-            return {"error": "Not enough tokens for request, you need to up tokens in account"}
+            return JSONResponse(
+                status_code=400,
+                content={"message": "Not enough tokens for request, you need to up tokens in account"},
+            )
     else:
-        return {"error": "API key is invalid"}
+        return JSONResponse(
+            status_code=404,
+            content={"message": "API key is invalid"},
+        )
 

@@ -1,14 +1,15 @@
 import flask
 import os
+import json
+import requests
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from forms.user import RegisterForm, LoginForm
 from data.users import User
 from data.chats import Chats
 from data import db_session
-
+from Ai_models.count_tokens_wtf import count_tokens
 from Ai_models.yandexgpt import yandexgptlite_requst
-
 
 app = flask.Flask(__name__)
 db_session.global_init("db/users.db")
@@ -29,9 +30,11 @@ def logout():
     logout_user()
     return flask.redirect("/")
 
+
 @app.route('/')
 def hello_world():  # put application's code here
     return flask.render_template('home.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -56,11 +59,11 @@ def register():
         if form.validate_on_submit():
             if form.password.data != form.password_again.data:
                 return flask.render_template('register.html', form=form,
-                                       message="Пароли не совпадают")
+                                             message="Пароли не совпадают")
             db_sess = db_session.create_session()
             if db_sess.query(User).filter(User.email == form.email.data).first():
                 return flask.render_template('register.html', form=form,
-                                       message="Такой пользователь уже есть")
+                                             message="Такой пользователь уже есть")
             user = User(
                 name=form.name.data,
                 email=form.email.data,
@@ -104,6 +107,12 @@ def Russian_Memory_view():
 def ai_platform():
     return flask.redirect('/pfai')
 
+
+@app.route('/pfai')
+def pfai():
+    return flask.render_template('PFAI/home_pfai.html')
+
+
 @app.route('/pfai/new_chat', methods=['POST', 'GET'])
 def pfai_new_chat():
     if flask.request.method == 'GET':
@@ -112,27 +121,80 @@ def pfai_new_chat():
         else:
             return flask.redirect('/login')
     elif flask.request.method == 'POST':
-        if flask.request.form['ai'] == 'YandexGPT-lite':
-            return flask.redirect('/pfai/chat')
+        resp = flask.make_response(flask.redirect('/pfai/chat'))
+        resp.set_cookie('ai', flask.request.form['ai'], max_age=60 * 60 * 24)
+        resp.set_cookie('prompt', flask.request.form['prompt'], max_age=60 * 60 * 24)
+        return resp
 
-@app.route('/pfai')
-def pfai():
-    return flask.render_template('PFAI/home_pfai.html')
 
 
 @app.route('/pfai/chat', methods=['POST', 'GET'])
 def pfai_chat():
     if flask.request.method == 'GET':
-        return flask.render_template('PFAI/chat_prew.html', ai_name='YandexGPT Lite', first_quens=True)
-    elif flask.request.method == 'POST':
-        return flask.render_template('PFAI/chat_prew.html',
-                                     answer="Ламинат подойдет для укладке на кухне или в детской", #test_requst(api_key, id_forder, flask.request.form['reqst_text'])
-                                     ai_name='YandexGPT Lite')
+        if current_user.is_authenticated:
+            answer = make_request(flask.request.cookies.get("prompt", ""), flask.request.cookies.get("ai", "Error"))
+            if answer == 404:
+                return flask.redirect('/api_key_invalid')
+            elif answer == 400:
+                return flask.redirect('/need_to_up_tokens')
+            return flask.render_template('PFAI/chat_prew.html', answer=answer, ai_name=flask.request.cookies.get("ai", "Error"))
+        else:
+            return flask.redirect('/login')
+
+
+def send_requset(api_key, json_request):
+    json_request = json.dumps(json_request)
+    response = requests.get(f'http://127.0.0.1:8000/api/v0/{api_key}', data=json_request)
+    response_json = response.json()
+    if response.status_code == 404:
+        return 404
+    elif response.status_code == 400:
+        return 400
+    return response_json["message"]
+
+
+def make_request(user_prompt, ai_model):
+    request = {
+        "model": f"{ai_model}",
+        "messages": [
+            {"role": "system", "content": "Ты полезный ассистент"},
+            {"role": "user", "content": f"{user_prompt}"}
+        ],
+        "temperature": 0.7,
+        "max_tokens": 1000
+    }
+    return send_requset("svMvUf9iETcfGY0cG9943hS0JQqpTCKq", request)
+
+
+
+def processing_message(message: list) -> list:
+    try:
+        if message[0]['role'] != 'system':
+            return [False, 'Uncorrected request, maybe "system"?', ""]
+        if message[1]['role'] != 'user':
+            return [False, 'Uncorrected request, maybe "user"?', ""]
+        if message[0]['content'] == '':
+            return [False, 'Uncorrected request, empty content for system', ""]
+        if message[1]['content'] == '':
+            return [False, 'Uncorrected request, empty content for user', ""]
+        return [True, message[0]['content'], message[1]['content']]
+    except:
+        return [False, 'Uncorrected request, not enough data', ""]
+
+
+@app.route('/api_key_invalid')
+def api_key_invalid():
+    return flask.render_template('tech_web_error_to_you.html')
+
+@app.route('/need_to_up_tokens')
+def need_to_up_tokens():
+    return flask.render_template('PFAI/error_not_money_in_api.html')
 
 
 @app.route('/test')
 def bsbsbsb():
     return flask.render_template('PFAI/test.html')
+
 
 @app.errorhandler(404)
 def error404(error):
@@ -142,4 +204,3 @@ def error404(error):
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
     app.run()
-
