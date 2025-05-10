@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Улучшил граф интерфейс pfai, добавил пару ошибок, граф интерфейс api тестовый">
+    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Улучшил ui home PFAI, и добавил создания api ключа в лк">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/chats.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/chats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/PFAI/new_chat_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/new_chat_pfai.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/profile_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile_info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +233,9 @@
       <workItem from="1746784046228" duration="1089000" />
       <workItem from="1746785787163" duration="9985000" />
       <workItem from="1746796526580" duration="2724000" />
-      <workItem from="1746848600938" duration="4559000" />
+      <workItem from="1746848600938" duration="7969000" />
+      <workItem from="1746857212597" duration="12731000" />
+      <workItem from="1746886352128" duration="5352000" />
     </task>
     <task id="LOCAL-00001" summary="Add home and Yandex Music widget">
       <option name="closed" value="true" />
@@ -314,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746449609400</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Улучшил ui home PFAI, и добавил создания api ключа в лк">
+      <option name="closed" value="true" />
+      <created>1746854259852</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746854259852</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,13 +385,14 @@
     <MESSAGE value="Сделал тестовое API" />
     <MESSAGE value="Доделал API, есть проверка кол-во токенов" />
     <MESSAGE value="Улучшил граф интерфейс pfai, добавил пару ошибок, граф интерфейс api тестовый" />
-    <option name="LAST_COMMIT_MESSAGE" value="Улучшил граф интерфейс pfai, добавил пару ошибок, граф интерфейс api тестовый" />
+    <MESSAGE value="Улучшил ui home PFAI, и добавил создания api ключа в лк" />
+    <option name="LAST_COMMIT_MESSAGE" value="Улучшил ui home PFAI, и добавил создания api ключа в лк" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Ai_site$generator_api_key.coverage" NAME="generator_api_key Coverage Results" MODIFIED="1746256611265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
     <SUITE FILE_PATH="coverage/Ai_site$count_tokens_wtf.coverage" NAME="count_tokens_wtf Coverage Results" MODIFIED="1746330342659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main_api__1_.coverage" NAME="main_api (1) Coverage Results" MODIFIED="1746443790157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1746853949568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1746895858360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ai_site$yandexgpt.coverage" NAME="yandexgpt Coverage Results" MODIFIED="1745238886746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1746250583721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
     <SUITE FILE_PATH="coverage/Ai_site$users.coverage" NAME="users Coverage Results" MODIFIED="1743344844714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />

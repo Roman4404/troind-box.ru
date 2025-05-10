@@ -14,11 +14,17 @@
             padding: 0;
         }
 
-        .centered-box_first {
+        .centered_box_first {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+
+        .content {
+            width: 800px;
+            padding: 30px;
+            text-align: center;
         }
 
         .centered-box {
@@ -28,15 +34,23 @@
             height: auto;
         }
 
-        .content {
-            width: 800px;
-            padding: 30px;
-            text-align: center;
+        .text_from_request {
+            width: 1000px;
+            margin-left: 500px;
         }
 
-        .text_from_request {
-            width: 740px;
-            text-align: left;
+        .ai_anwer {
+            color: #ffffff;
+            margin-top: 25px
+        }
+
+        .user_request {
+            width: fit-content;
+            margin-left: auto;
+            background: #e1e2e7;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin-top: 25px;
         }
     </style>
 </head>
@@ -46,13 +60,29 @@
 
     {% block content %}
         <div style="display: flex">
-            <center>
+            <script>
+                function checkHeight() {
+                    const block = document.querySelector('.adaptive-block');
+                    const viewportHeight = window.innerHeight;
+                    const blockHeight = block.offsetHeight;
+
+                    if (blockHeight > viewportHeight) {
+                        block.style.marginBottom = '100px';
+                    } else {
+                        block.style.marginBottom = '0';
+                    }
+                }
+                window.addEventListener('load', checkHeight);
+                window.addEventListener('resize', checkHeight);
+            </script>
+
+            <div class="adaptive-block" style="border-radius: 10px; padding: 15px;">
                 <div class="text_from_request">
-                    <h3>{{ answer }}</h3>
+                    {{ answer|safe }}
                 </div>
-            </center>
+            </div>
             <div style="position: fixed; bottom: 0; width: 100%;">
-                <div class="centered-box">
+                <div class="centered-box" id="form_input" style="margin-right: 500px">
                     <div class="content">
                         <form method="post">
                             <div class="input-group mb-3">
@@ -63,11 +93,21 @@
                                 <button class="btn btn-success" type="submit" id="button-addon2">Send ^</button>
                             </div>
                         </form>
+                        <script>
+                            const form_input = document.getElementById('form_input')
+                            const screenWidth = window.innerWidth;
+                            const screenHeight = screen.height;
+                            form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                            window.addEventListener('resize', (event) => {
+                                const screenWidth = window.innerWidth;
+                                form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     {% endblock %}
-    <div>
+</div>
 </body>
 </html>

@@ -20,6 +20,15 @@ login_manager.init_app(app)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
 
+def load_chats_navbar():
+    db_sess = db_session.create_session()
+    chat_in_db = db_sess.query(Chats).filter(Chats.user_id == current_user.id).all()
+    # chat_id = chat_in_db[-1].id
+    full_id_chats = []
+    for i in chat_in_db:
+        full_id_chats.append(i.id)
+    return full_id_chats
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
@@ -47,11 +56,11 @@ def login():
             user = db_sess.query(User).filter(User.email == form.email.data).first()
             if user and user.check_password(form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                return flask.redirect("/")
+                return flask.redirect(f'/profile/{current_user.id}')
             return flask.render_template('login.html', message="Неправильный логин или пароль", form=form)
         return flask.render_template('login.html', title='Авторизация', form=form)
     else:
-        return flask.redirect(f'/profile/{current_user.name}')
+        return flask.redirect(f'/profile/{current_user.id}')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -91,7 +100,7 @@ def profile_view(idd):
                     find_user = True
                     break
             if find_user:
-                api_key = db_sess.query(API_keys).filter(API_keys.id == int(idd)).first()
+                api_key = db_sess.query(API_keys).filter(API_keys.user_id == int(idd)).first()
                 if api_key:
                     ui_api_key = api_key.api_key
                 else:
@@ -120,9 +129,10 @@ def new_api_key():
         )
         db_sess.add(api_key)
         db_sess.commit()
-        api_key_db = db_sess.query(User).filter(API_keys.user_id == current_user.id).first()
+        api_key_db = db_sess.query(API_keys).filter(API_keys.user_id == current_user.id).first()
         user.api_keys_id = api_key_db.id
         db_sess.commit()
+        db_sess.close()
         return flask.redirect(f'/profile/{current_user.id}')
     else:
         return flask.redirect('/')
@@ -145,29 +155,80 @@ def pfai():
 def pfai_new_chat():
     if flask.request.method == 'GET':
         if current_user.is_authenticated:
-            return flask.render_template('PFAI/new_chat_pfai.html')
+            return flask.render_template('PFAI/new_chat_pfai.html', items=load_chats_navbar())
         else:
             return flask.redirect('/login')
     elif flask.request.method == 'POST':
-        resp = flask.make_response(flask.redirect('/pfai/chat'))
+        new_chat = Chats(
+            name='New Chat',
+            ai_model = flask.request.form['ai'],
+            text_chat=f'user:{flask.request.form["prompt"]};',
+            user_id=current_user.id
+        )
+        db_sess = db_session.create_session()
+        db_sess.add(new_chat)
+        db_sess.commit()
+        chat_in_db = db_sess.query(Chats).filter(Chats.user_id == current_user.id).all()
+        chat_id = chat_in_db[-1].id
+        resp = flask.make_response(flask.redirect(f'/pfai/chat/{chat_id}'))
         resp.set_cookie('ai', flask.request.form['ai'], max_age=60 * 60 * 24)
         resp.set_cookie('prompt', flask.request.form['prompt'], max_age=60 * 60 * 24)
         return resp
 
 
 
-@app.route('/pfai/chat', methods=['POST', 'GET'])
-def pfai_chat():
+@app.route('/pfai/chat/<chat_id>', methods=['POST', 'GET'])
+def pfai_chat(chat_id):
+    db_sess = db_session.create_session()
+    chat_in_db = db_sess.query(Chats).filter(Chats.id == chat_id).first()
     if flask.request.method == 'GET':
         if current_user.is_authenticated:
-            answer = make_request(flask.request.cookies.get("prompt", ""), flask.request.cookies.get("ai", "Error"))
-            if answer == 404:
-                return flask.redirect('/api_key_invalid')
-            elif answer == 400:
-                return flask.redirect('/need_to_up_tokens')
-            return flask.render_template('PFAI/chat_prew.html', answer=answer, ai_name=flask.request.cookies.get("ai", "Error"))
+            api_key = db_sess.query(API_keys).filter(API_keys.user_id == current_user.id).first()
+            if int(chat_id) in load_chats_navbar():
+                if flask.request.cookies.get("prompt", "") != "":
+                    answer = make_request(flask.request.cookies.get("prompt", ""), flask.request.cookies.get("ai", "Error"), api_key.api_key)
+                    if answer == 404:
+                        return flask.redirect('/api_key_invalid')
+                    elif answer == 400:
+                        return flask.redirect('/need_to_up_tokens')
+                    chat_in_db.text_chat = str(chat_in_db.text_chat) + f'ai:{answer};'
+                    db_sess.commit()
+                    answer_in_db = chat_in_db.text_chat
+                    answer = ""
+                    answer_in_db = answer_in_db.split(";")
+                    for past in answer_in_db:
+                        if "ai:" in past:
+                            answer += '<h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px">' + past[3:] + '</h5>'
+                        elif "user:" in past:
+                            answer += '<div class="user_request"><h5 style="text-align: end; color: #121212">' + past[5:] + '</h5></div>'
+                    resp = flask.make_response(flask.render_template('PFAI/chat_prew.html', answer=answer, ai_name=chat_in_db.ai_model, items=load_chats_navbar()))
+                    resp.set_cookie('prompt', '', max_age=0)
+                    resp.set_cookie('ai', '', max_age=0)
+                else:
+                    answer = ""
+                    answer_in_db = chat_in_db.text_chat
+                    answer_in_db = answer_in_db.split(";")
+                    for past in answer_in_db:
+                        if "ai:" in past:
+                            answer += '<h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px">' + past[3:] + '</h5>'
+                        elif "user:" in past:
+                            answer += '<div class="user_request"><h5 style="text-align: end; color: #121212">' + past[5:] + '</h5></div>'
+                    resp = flask.make_response(flask.render_template('PFAI/chat_prew.html', answer=answer, ai_name=chat_in_db.ai_model,items=load_chats_navbar()))
+                    db_sess.close()
+                return resp
+            else:
+                return flask.render_template('error404.html')
+
         else:
             return flask.redirect('/login')
+    elif flask.request.method == 'POST':
+        resp = flask.make_response(flask.redirect(f'/pfai/chat/{chat_id}'))
+        resp.set_cookie('ai', chat_in_db.ai_model, max_age=60 * 60 * 24)
+        resp.set_cookie('prompt', flask.request.form['prompt'], max_age=60 * 60 * 24)
+        chat_in_db.text_chat = chat_in_db.text_chat + f'user:{flask.request.form["prompt"]};'
+        db_sess.commit()
+        return resp
+
 
 
 def send_requset(api_key, json_request):
@@ -181,7 +242,7 @@ def send_requset(api_key, json_request):
     return response_json["message"]
 
 
-def make_request(user_prompt, ai_model):
+def make_request(user_prompt, ai_model, api_key_user):
     request = {
         "model": f"{ai_model}",
         "messages": [
@@ -191,7 +252,7 @@ def make_request(user_prompt, ai_model):
         "temperature": 0.7,
         "max_tokens": 1000
     }
-    return send_requset("svMvUf9iETcfGY0cG9943hS0JQqpTCKq", request)
+    return send_requset(api_key_user, request)
 
 
 
