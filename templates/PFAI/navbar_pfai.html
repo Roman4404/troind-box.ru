@@ -17,7 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: auto">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" id="base_navbar" style="width: 280px; height: auto; position: fixed">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <svg class="bi pe-none me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
@@ -40,7 +40,7 @@
         {% endfor %}
     </ul>
     <hr>
-    <form class="d-flex" role="search">
+    <form class="d-flex" role="search" style="margin-bottom: 100px">
         {% if current_user.is_authenticated %}
             <a class="navbar-brand" style="color: #0b121b; font-size: 20px"
                href="/profile/{{ current_user.id }}">{{ current_user.name }}</a>
@@ -52,6 +52,17 @@
             </p>
         {% endif %}
     </form>
+    <script>
+        const base_navbar = document.getElementById('base_navbar')
+        const screenWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        base_navbar.style['height'] = windowHeight + "px";
+        window.addEventListener('resize', (event) => {
+            const screenWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            base_navbar.style['height'] = windowHeight + "px";
+        });
+    </script>
 </div>
 <main role="main" class="My_container">
     {% block content %}

@@ -36,7 +36,7 @@
 
         .text_from_request {
             width: 1000px;
-            margin-left: 500px;
+            margin-left: 724px;
         }
 
         .ai_anwer {
@@ -77,7 +77,7 @@
             </script>
 
             <div class="adaptive-block" style="border-radius: 10px; padding: 15px;">
-                <div class="text_from_request">
+                <div class="text_from_request" id="answer_ai">
                     {{ answer|safe }}
                 </div>
             </div>
@@ -95,12 +95,16 @@
                         </form>
                         <script>
                             const form_input = document.getElementById('form_input')
+                            const answer_ai = document.getElementById('answer_ai')
                             const screenWidth = window.innerWidth;
-                            const screenHeight = screen.height;
-                            form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                            const windowHeight = window.innerHeight;
+                            answer_ai.style["margin-left"] = (724 * (screenWidth / 2560)) - 200 + 280 + "px";
+                            form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 - 280 + "px";
                             window.addEventListener('resize', (event) => {
                                 const screenWidth = window.innerWidth;
-                                form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                                const windowHeight = window.innerHeight;
+                                answer_ai.style["margin-left"] = (724 * (screenWidth / 2560)) - 200 + 280 + "px";
+                                form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 - 280 + "px";
                             });
                         </script>
                     </div>
