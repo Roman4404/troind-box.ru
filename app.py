@@ -7,9 +7,11 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from forms.user import RegisterForm, LoginForm
 from data.users import User
 from data.chats import Chats
+from data.api_keys import API_keys
 from data import db_session
 from Ai_models.count_tokens_wtf import count_tokens
 from Ai_models.yandexgpt import yandexgptlite_requst
+from API.generator_api_key import generate_api_key
 
 app = flask.Flask(__name__)
 db_session.global_init("db/users.db")
@@ -77,19 +79,24 @@ def register():
         return flask.redirect(f'/profile/{current_user.name}')
 
 
-@app.route('/profile/<name>')
-def profile_view(name):
+@app.route('/profile/<idd>')
+def profile_view(idd):
     db_sess = db_session.create_session()
     all_users = db_sess.query(User).all()
     if current_user.is_authenticated:
-        if current_user.name == name:
+        if idd.isdigit() and current_user.id == int(idd):
             find_user = False
             for user in all_users:
-                if name == user.name:
+                if int(idd) == user.id:
                     find_user = True
                     break
             if find_user:
-                return flask.render_template('profile_info.html', name=name, count_tokens=user.count_tokes)
+                api_key = db_sess.query(API_keys).filter(API_keys.id == int(idd)).first()
+                if api_key:
+                    ui_api_key = api_key.api_key
+                else:
+                    ui_api_key = ""
+                return flask.render_template('profile_info.html', name=current_user.name, count_tokens=user.count_tokes, user_api_key=ui_api_key)
             else:
                 return flask.render_template('error404.html')
         else:
@@ -98,6 +105,27 @@ def profile_view(name):
         return flask.redirect('/login')
 
 
+@app.route('/new_api_key')
+def new_api_key():
+    if current_user.is_authenticated:
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.id == current_user.id).first()
+        if user.api_keys_id != None:
+            api_key_for_del = db_sess.query(API_keys).filter(API_keys.id == user.api_keys_id).first()
+            db_sess.delete(api_key_for_del)
+            db_sess.commit()
+        api_key = API_keys(
+            api_key=generate_api_key(),
+            user_id=current_user.id
+        )
+        db_sess.add(api_key)
+        db_sess.commit()
+        api_key_db = db_sess.query(User).filter(API_keys.user_id == current_user.id).first()
+        user.api_keys_id = api_key_db.id
+        db_sess.commit()
+        return flask.redirect(f'/profile/{current_user.id}')
+    else:
+        return flask.redirect('/')
 @app.route('/russian_memory')
 def Russian_Memory_view():
     return flask.render_template('russian_memory_view.html')

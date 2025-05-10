@@ -14,13 +14,13 @@
             padding: 0;
         }
 
-        .centered-box_first {
+        .centered_box_first {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin-left: 530px;
         }
+
         .content {
             width: 800px;
             padding: 30px;
@@ -42,9 +42,9 @@
     {% block content %}
         <div style="display: flex">
         <form style="display: flex" method="post">
-            <div style="margin-left: 10px;">
+            <div style="margin-left: 50px;">
                 <div class="input-group mb-3">
-                    <select class="form-select" id="inputGroupSelect01" name="ai" style="width: 200px">
+                    <select class="form-select" id="inputGroupSelect01" name="ai" style="width: 200px; background-color: #121212; color: #ffffff; border-color: #00000013; font-weight: 500; transform: scale(1.5);">
                         <option value="YandexGPT-lite">YandexGPT-lite</option>
                         <option value="Deepseek-v3">Deepseek-v3</option>
                         <option value="ChatGPT-3.5-Turbo" disabled>ChatGPT-3.5-Turboo</option>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="centered-box_first">
+            <div class="centered_box_first" id="form_input" style="margin-left: 500px">
                 <div class="content">
                     <form method="post">
                         <div class="input-group mb-3">
@@ -71,12 +71,28 @@
         <script>
             const select_ai = document.getElementById('inputGroupSelect01');
             const inp_req = document.getElementById('input_request');
+            const form_input = document.getElementById('form_input')
+            const screenWidth = window.innerWidth;
+            const screenHeight = screen.height;
+            if (screenWidth !== 2560) {
+                form_input.style["margin-left"] = (500 * (screenWidth / 2560)) - 200 + "px";
+            }
+            const centered_box_first = document.querySelectorAll('.centered_box_first');
             inp_req.placeholder = `Запрос в ${select_ai.value}...`;
             select_ai.addEventListener('input', (event) => {
                 inp_req.placeholder = `Запрос в ${select_ai.value}...`;
             });
+            window.addEventListener('resize', (event) => {
+                const screenWidth = window.innerWidth;
+                if (screenWidth !== 2560) {
+                    form_input.style["margin-left"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                } else {
+                    form_input.style["margin-left"] = "500px";
+                }
+            });
         </script>
     {% endblock %}
     </div>
+</div>
 </body>
 </html>
