@@ -72,17 +72,24 @@
                         block.style.marginBottom = '0';
                     }
                 }
+
                 window.addEventListener('load', checkHeight);
                 window.addEventListener('resize', checkHeight);
             </script>
 
             <div class="adaptive-block" style="border-radius: 10px; padding: 15px;">
                 <div class="text_from_request" id="answer_ai">
-                    {{ answer|safe }}
+                    {% for i in range(0, answer|length, 2) %}
+                        {% if answer[i] == "ai" %}
+                            <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px">{{ answer[i + 1] }}</h5>
+                        {% elif answer[i] == "user" %}
+                            <div class="user_request"><h5 style="text-align: end; color: #121212">{{ answer[i + 1] }}</h5></div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div style="position: fixed; bottom: 0; width: 100%;">
-                <div class="centered-box" id="form_input" style="margin-right: 500px">
+                <div class="centered-box" id="form_input" style="margin-left: 500px">
                     <div class="content">
                         <form method="post">
                             <div class="input-group mb-3">
@@ -96,15 +103,13 @@
                         <script>
                             const form_input = document.getElementById('form_input')
                             const answer_ai = document.getElementById('answer_ai')
-                            const screenWidth = window.innerWidth;
-                            const windowHeight = window.innerHeight;
-                            answer_ai.style["margin-left"] = (724 * (screenWidth / 2560)) - 200 + 280 + "px";
-                            form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 - 280 + "px";
+                            const screenWidth_request = window.innerWidth;
+                            answer_ai.style["margin-left"] = (724 * (screenWidth_request / 2560)) - 200 + 280 + "px";
+                            form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
                             window.addEventListener('resize', (event) => {
-                                const screenWidth = window.innerWidth;
-                                const windowHeight = window.innerHeight;
-                                answer_ai.style["margin-left"] = (724 * (screenWidth / 2560)) - 200 + 280 + "px";
-                                form_input.style["margin-right"] = (500 * (screenWidth / 2560)) - 200 - 280 + "px";
+                                const screenWidth_request = window.innerWidth;
+                                answer_ai.style["margin-left"] = (724 * (screenWidth_request / 2560)) - 200 + 280 + "px";
+                                form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
                             });
                         </script>
                     </div>

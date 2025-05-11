@@ -13,14 +13,37 @@
             margin: 0;
             padding: 0;
         }
+
+        .chats_visible {
+            width: 230px;
+            height: 75px;
+            background-color: #ebecec;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .plain-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .plain-link:hover {
+            color: #555;
+        }
+
+        .scrollable-element {
+            overflow: auto;
+            width: 250px;
+            border: 1px solid #ccc;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" id="base_navbar" style="width: 280px; height: auto; position: fixed">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" id="base_navbar"
+     style="width: 280px; height: auto; position: fixed; z-index: 100;">
+    <a href="/pfai" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <svg class="bi pe-none me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
         </svg>
         <span class="fs-4">PFAI</span>
     </a>
@@ -35,12 +58,17 @@
             </a>
         </li>
         <h3 style="color: #000000">Chats:</h3>
-        {% for item in items %}
-            <a style="color: #000000" href="/pfai/chat/{{ item }}">{{ item }}</a>
-        {% endfor %}
+        <div class="scrollable-element" id="chats_history" style="max-height: 1000px;">
+            {% for id in items %}
+                <div class="chats_visible">
+                    <h6 style="color: #000000"><a class="plain-link"
+                                                  href="/pfai/chat/{{ id }}">{{ items[id] }}</a></h6>
+                </div>
+            {% endfor %}
+        </div>
     </ul>
     <hr>
-    <form class="d-flex" role="search" style="margin-bottom: 100px">
+    <form class="d-flex" role="search" style="">
         {% if current_user.is_authenticated %}
             <a class="navbar-brand" style="color: #0b121b; font-size: 20px"
                href="/profile/{{ current_user.id }}">{{ current_user.name }}</a>
@@ -54,13 +82,14 @@
     </form>
     <script>
         const base_navbar = document.getElementById('base_navbar')
-        const screenWidth = window.innerWidth;
+        const chats_history = document.getElementById('chats_history')
         const windowHeight = window.innerHeight;
+        chats_history.style['max-height'] = 1000 - (1292 - windowHeight) + "px";
         base_navbar.style['height'] = windowHeight + "px";
         window.addEventListener('resize', (event) => {
-            const screenWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
             base_navbar.style['height'] = windowHeight + "px";
+            chats_history.style['max-height'] = 1000 - (1292 - windowHeight) + "px";
         });
     </script>
 </div>

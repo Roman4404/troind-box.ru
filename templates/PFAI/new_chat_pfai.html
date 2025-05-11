@@ -42,7 +42,7 @@
     {% block content %}
         <div style="display: flex">
         <form style="display: flex" method="post">
-            <div style="margin-left: 50px;">
+            <div style="margin-left: 330px;">
                 <div class="input-group mb-3">
                     <select class="form-select" id="inputGroupSelect01" name="ai" style="width: 200px; background-color: #121212; color: #ffffff; border-color: #00000013; font-weight: 500; transform: scale(1.5);">
                         <option value="YandexGPT-lite">YandexGPT-lite</option>
@@ -72,10 +72,9 @@
             const select_ai = document.getElementById('inputGroupSelect01');
             const inp_req = document.getElementById('input_request');
             const form_input = document.getElementById('form_input')
-            const screenWidth = window.innerWidth;
-            const screenHeight = screen.height;
-            if (screenWidth !== 2560) {
-                form_input.style["margin-left"] = (500 * (screenWidth / 2560)) - 200 + "px";
+            const screenWidth_request = window.innerWidth;
+            if (screenWidth_request !== 2560) {
+                form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
             }
             const centered_box_first = document.querySelectorAll('.centered_box_first');
             inp_req.placeholder = `Запрос в ${select_ai.value}...`;
@@ -83,9 +82,9 @@
                 inp_req.placeholder = `Запрос в ${select_ai.value}...`;
             });
             window.addEventListener('resize', (event) => {
-                const screenWidth = window.innerWidth;
-                if (screenWidth !== 2560) {
-                    form_input.style["margin-left"] = (500 * (screenWidth / 2560)) - 200 + "px";
+                const screenWidth_request = window.innerWidth;
+                if (screenWidth_request !== 2560) {
+                    form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
                 } else {
                     form_input.style["margin-left"] = "500px";
                 }
