@@ -169,7 +169,7 @@ def pfai_new_chat():
         new_chat = Chats(
             name=flask.request.form["prompt"][:20] + "...",
             ai_model = flask.request.form['ai'],
-            text_chat=f'user:{flask.request.form["prompt"]};',
+            text_chat=f'user:{flask.request.form["prompt"]}%#%',
             user_id=current_user.id
         )
         db_sess = db_session.create_session()
@@ -199,11 +199,11 @@ def pfai_chat(chat_id):
                         return flask.redirect('/api_key_invalid')
                     elif answer == 400:
                         return flask.redirect('/need_to_up_tokens')
-                    chat_in_db.text_chat = str(chat_in_db.text_chat) + f'ai:{answer};'
+                    chat_in_db.text_chat = str(chat_in_db.text_chat) + f'ai:{answer}%#%'
                     db_sess.commit()
                     answer_in_db = chat_in_db.text_chat
                     answer = []
-                    answer_in_db = answer_in_db.split(";")
+                    answer_in_db = answer_in_db.split("%#%")
                     for past in answer_in_db:
                         if "ai:" in past:
                             answer.append("ai")
@@ -217,7 +217,7 @@ def pfai_chat(chat_id):
                 else:
                     answer = []
                     answer_in_db = chat_in_db.text_chat
-                    answer_in_db = answer_in_db.split(";")
+                    answer_in_db = answer_in_db.split("%#%")
                     for past in answer_in_db:
                         if "ai:" in past:
                             answer.append("ai")

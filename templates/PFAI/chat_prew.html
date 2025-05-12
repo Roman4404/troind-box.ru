@@ -52,6 +52,31 @@
             padding: 10px 20px;
             margin-top: 25px;
         }
+
+        .quote-content {
+            background-color: #1c1e45;
+            border-left: 4px solid #6d6d6d;
+            padding: 12px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .quote-container {
+            margin: 20px 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-header {
+            background-color: #e0e0e0;
+            padding: 8px 12px;
+            font-family: sans-serif;
+            font-size: 0.9em;
+            color: #555;
+            border-bottom: 1px solid #ccc;
+        }
+
     </style>
 </head>
 <body>
@@ -81,9 +106,30 @@
                 <div class="text_from_request" id="answer_ai">
                     {% for i in range(0, answer|length, 2) %}
                         {% if answer[i] == "ai" %}
-                            <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px">{{ answer[i + 1] }}</h5>
+                            {% set parts = answer[i + 1].split("```") %}
+                            {% for part in parts %}
+                                {% if loop.index0 % 2 == 1 %}
+                                    <div class="quote-container">
+                                        <div class="quote-header">
+                                            Code
+                                        </div>
+                                        <div class="quote-content"><h5 class="ai_anwer"
+                                                                       style="color: #ffffff; margin-top: 25px">{{ part }}</h5>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    {% if "**" in part %}
+                                        {% set split_a = part.split("**") %}
+                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px;"><p style="font-style: italic">{{ split_a[1] }}</p><p>{{ split_a[2] }}</p></h5>
+                                    {% else %}
+                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px"><p>{{ part }}</p></h5>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {#                            <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px">{{ answer[i + 1] }}</h5>#}
                         {% elif answer[i] == "user" %}
-                            <div class="user_request"><h5 style="text-align: end; color: #121212">{{ answer[i + 1] }}</h5></div>
+                            <div class="user_request"><h5
+                                    style="text-align: end; color: #121212">{{ answer[i + 1] }}</h5></div>
                         {% endif %}
                     {% endfor %}
                 </div>
