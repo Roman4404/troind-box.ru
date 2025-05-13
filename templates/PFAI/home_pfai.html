@@ -44,13 +44,18 @@
 {% extends "navbar.html" %}
 
 {% block content %}
-<div class="centered-box_first">
-    <h1 style="font-size: 100px">Platform For Artificial Intelligence</h1>
-</div>
-<center>
-    <button type="button" class="btn btn-primary" style="font-size: 20px" onclick="window.location='/pfai/new_chat'">Chat</button>
-    <button type="button" class="btn btn-info" style="margin-left: 50px; font-size: 20px" onclick="window.location='/pfai/dashboard'">Dashboard</button>
-</center>
+    <img src="../../static/img/PFAI_no_fonv3_black.png" style="position: fixed; margin-top: 35px;margin-left: 30px;">
+    <div class="centered-box_first">
+        <h1 style="font-size: 100px">Platform For Artificial Intelligence</h1>
+    </div>
+    <center>
+        <button type="button" class="btn btn-primary" style="font-size: 20px"
+                onclick="window.location='/pfai/new_chat'">Chat
+        </button>
+        <button type="button" class="btn btn-info" style="margin-left: 50px; font-size: 20px"
+                onclick="window.location='/pfai/dashboard'">Dashboard
+        </button>
+    </center>
 {% endblock %}
 </body>
 </html>

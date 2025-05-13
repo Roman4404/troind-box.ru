@@ -25,7 +25,7 @@ def load_chats_navbar():
     chat_in_db = db_sess.query(Chats).filter(Chats.user_id == current_user.id).all()
     # chat_id = chat_in_db[-1].id
     full_id_chats = {}
-    for i in chat_in_db:
+    for i in chat_in_db[::-1]:
         full_id_chats[i.id] = i.name
     return full_id_chats
 

@@ -106,6 +106,8 @@
                 <div class="text_from_request" id="answer_ai">
                     {% for i in range(0, answer|length, 2) %}
                         {% if answer[i] == "ai" %}
+                            <img src="../../static/img/{{ ai_name }}_img.jpeg" alt="" width="32" height="32" class="rounded-circle me-2" style="display: inline;">
+                            <h4 style="color: white; display: inline;">{{ ai_name }}</h4>
                             {% set parts = answer[i + 1].split("```") %}
                             {% for part in parts %}
                                 {% if loop.index0 % 2 == 1 %}
@@ -120,9 +122,20 @@
                                 {% else %}
                                     {% if "**" in part %}
                                         {% set split_a = part.split("**") %}
-                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px;"><p style="font-style: italic">{{ split_a[1] }}</p><p>{{ split_a[2] }}</p></h5>
+                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px;">
+                                            <p style="font-weight: bold; display: inline;">{{ split_a[1] }}</p>
+                                            {% if "`" in split_a[2] %}
+                                                {% set split_b = split_a[2].split("`") %}
+                                                <p style="display: inline;">{{ split_b[0] }}</p>
+                                                <p style="display: inline;"><span style="font-weight: bold; background: rgba(80,80,80,0.66); padding: 1px 2px; border-radius: 2px;">{{ split_b[1] }}</span></p>
+                                                <p style="display: inline;">{{ split_b[2] }}</p>
+                                            {% else %}
+                                                <p style="display: inline;">{{ split_a[2] }}</p>
+                                            {% endif %}
+                                        </h5>
                                     {% else %}
-                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px"><p>{{ part }}</p></h5>
+                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px"><p>{{ part }}</p>
+                                        </h5>
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
