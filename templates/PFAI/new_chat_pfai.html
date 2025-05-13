@@ -42,12 +42,13 @@
     {% block content %}
         <div style="display: flex">
         <form style="display: flex" method="post">
-            <div style="margin-left: 330px;">
+            <img src="../../static/img/YandexGPT-lite_img.png" id="img_ai" alt="" width="32" height="32" class="rounded-circle me-2" style="display: inline; margin-left: 290px; margin-top: 5px; z-index: 2">
+            <div style="margin-left: 50px;" style="display: inline;">
                 <div class="input-group mb-3">
                     <select class="form-select" id="inputGroupSelect01" name="ai" style="width: 200px; background-color: #121212; color: #ffffff; border-color: #00000013; font-weight: 500; transform: scale(1.5);">
                         <option value="YandexGPT-lite">YandexGPT-lite</option>
-                        <option value="Deepseek-v3">Deepseek-v3</option>
-                        <option value="ChatGPT-3.5-Turbo" disabled>ChatGPT-3.5-Turboo</option>
+                        <option value="Llama-8b">Llama-8b</option>
+                        <option value="Deepseek-v3" disabled>Deepseek-v3</option>
                     </select>
                     <p id="textOutput"></p>
                 </div>
@@ -71,15 +72,18 @@
         <script>
             const select_ai = document.getElementById('inputGroupSelect01');
             const inp_req = document.getElementById('input_request');
-            const form_input = document.getElementById('form_input')
+            const form_input = document.getElementById('form_input');
+            const img_ai = document.getElementById('img_ai');
             const screenWidth_request = window.innerWidth;
             if (screenWidth_request !== 2560) {
                 form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
             }
             const centered_box_first = document.querySelectorAll('.centered_box_first');
             inp_req.placeholder = `Запрос в ${select_ai.value}...`;
+            img_ai.src = `../../static/img/${select_ai.value}_img.png`;
             select_ai.addEventListener('input', (event) => {
                 inp_req.placeholder = `Запрос в ${select_ai.value}...`;
+                img_ai.src = `../../static/img/${select_ai.value}_img.png`;
             });
             window.addEventListener('resize', (event) => {
                 const screenWidth_request = window.innerWidth;

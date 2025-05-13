@@ -11,6 +11,7 @@ from data.api_keys import API_keys
 from data.users import User
 
 from Ai_models.yandexgpt import yandexgptlite_requst
+from Ai_models.llama import llama8b_requst
 
 
 db_session.global_init("db/users.db")
@@ -58,6 +59,16 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     if count_tokens_user < 0:
                         request.max_tokens = 100 + count_tokens_user
                     final_message = str(yandexgptlite_requst(system_context, user_context, request.max_tokens,
+                                                                request.temperature))
+                    count_tokens_user -= count_tokens(final_message)
+                    count_tokens_user -= count_tokens(user_context)
+                    user.count_tokes = count_tokens_user
+                    db_sess.commit()
+                    return {"message": final_message}
+                elif request.model == "Llama-8b":
+                    if count_tokens_user < 0:
+                        request.max_tokens = 100 + count_tokens_user
+                    final_message = str(llama8b_requst(system_context, user_context, request.max_tokens,
                                                                 request.temperature))
                     count_tokens_user -= count_tokens(final_message)
                     count_tokens_user -= count_tokens(user_context)

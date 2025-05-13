@@ -26,7 +26,7 @@ def load_chats_navbar():
     # chat_id = chat_in_db[-1].id
     full_id_chats = {}
     for i in chat_in_db[::-1]:
-        full_id_chats[i.id] = i.name
+        full_id_chats[i.id] = [i.name, i.ai_model]
     return full_id_chats
 
 @login_manager.user_loader
@@ -239,7 +239,7 @@ def pfai_chat(chat_id):
         resp = flask.make_response(flask.redirect(f'/pfai/chat/{chat_id}'))
         resp.set_cookie('ai', chat_in_db.ai_model, max_age=60 * 60 * 24)
         resp.set_cookie('prompt', flask.request.form['prompt'], max_age=60 * 60 * 24)
-        chat_in_db.text_chat = chat_in_db.text_chat + f'user:{flask.request.form["prompt"]};'
+        chat_in_db.text_chat = chat_in_db.text_chat + f'user:{flask.request.form["prompt"]}%#%'
         db_sess.commit()
         db_sess.close()
         return resp
@@ -265,7 +265,7 @@ def make_request(user_prompt, ai_model, api_key_user):
             {"role": "user", "content": f"{user_prompt}"}
         ],
         "temperature": 0.7,
-        "max_tokens": 1000
+        "max_tokens": 10000
     }
     return send_requset(api_key_user, request)
 

@@ -106,35 +106,81 @@
                 <div class="text_from_request" id="answer_ai">
                     {% for i in range(0, answer|length, 2) %}
                         {% if answer[i] == "ai" %}
-                            <img src="../../static/img/{{ ai_name }}_img.jpeg" alt="" width="32" height="32" class="rounded-circle me-2" style="display: inline;">
+                            <img src="../../static/img/{{ ai_name }}_img.png" alt="" width="32" height="32"
+                                 class="rounded-circle me-2" style="display: inline;">
                             <h4 style="color: white; display: inline;">{{ ai_name }}</h4>
                             {% set parts = answer[i + 1].split("```") %}
-                            {% for part in parts %}
-                                {% if loop.index0 % 2 == 1 %}
+                            {% for i_part in range(0, parts|length) %}
+                                {% if i_part % 2 == 1 %}
                                     <div class="quote-container">
                                         <div class="quote-header">
-                                            Code
+                                            {% set code_langgege = parts[i_part].split("\n")[0] %}
+                                            {% if code_langgege %}
+                                                {{ parts[i_part].split("\n")[0] }}
+                                            {% else %}
+                                                Code
+                                            {% endif %}
                                         </div>
                                         <div class="quote-content"><h5 class="ai_anwer"
-                                                                       style="color: #ffffff; margin-top: 25px">{{ part }}</h5>
+                                                                       style="color: #ffffff; margin-top: 25px">{{ parts[i_part][parts[i_part].split("\n")[0]|length:] }}</h5>
                                         </div>
                                     </div>
                                 {% else %}
-                                    {% if "**" in part %}
-                                        {% set split_a = part.split("**") %}
+                                    {% if "**" in parts[i_part] %}
+                                        {% set split_a = parts[i_part].split("**") %}
                                         <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px;">
-                                            <p style="font-weight: bold; display: inline;">{{ split_a[1] }}</p>
-                                            {% if "`" in split_a[2] %}
-                                                {% set split_b = split_a[2].split("`") %}
-                                                <p style="display: inline;">{{ split_b[0] }}</p>
-                                                <p style="display: inline;"><span style="font-weight: bold; background: rgba(80,80,80,0.66); padding: 1px 2px; border-radius: 2px;">{{ split_b[1] }}</span></p>
-                                                <p style="display: inline;">{{ split_b[2] }}</p>
-                                            {% else %}
-                                                <p style="display: inline;">{{ split_a[2] }}</p>
-                                            {% endif %}
+                                            {% for j_part in range(0, split_a|length) %}
+                                                {% if j_part % 2 == 0 %}
+                                                    {% if "`" in split_a[j_part] %}
+                                                        {% set split_b = split_a[j_part].split("`") %}
+                                                        {% for g_part in range(0, split_b|length) %}
+                                                            {% if g_part % 2 == 0 %}
+                                                                <p style="display: inline;">{{ split_b[g_part] }}</p>
+                                                            {% else %}
+                                                                <p style="display: inline;"><span
+                                                                        style="font-weight: bold; background: rgba(80,80,80,0.66); padding: 1px 2px; border-radius: 2px;">{{ split_b[g_part] }}</span>
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <p style="">{{ split_a[j_part] }}</p>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <br>
+                                                    {% if "`" in split_a[j_part] %}
+                                                        {% set split_b = split_a[j_part].split("`") %}
+                                                        {% for g_part in range(0, split_b|length) %}
+                                                            {% if g_part % 2 == 0 %}
+                                                                <p style="display: inline; font-weight: bold; font-size: 25px">{{ split_b[g_part] }}</p>
+                                                            {% else %}
+                                                                <p style="display: inline;"><span
+                                                                        style="font-weight: bold; background: rgba(80,80,80,0.66); padding: 1px 2px; border-radius: 2px;">{{ split_b[g_part] }}</span>
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <p style="display: inline; font-weight: bold; font-size: 25px">{{ split_a[j_part] }}</p>
+                                                    {% endif %}
+                                                    <br>
+                                                {% endif %}
+                                            {% endfor %}
                                         </h5>
                                     {% else %}
-                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px"><p>{{ part }}</p>
+                                        <h5 class="ai_anwer" style="color: #ffffff; margin-top: 25px;">
+                                        {% if "`" in parts[i_part] %}
+                                            {% set split_b = parts[i_part].split("`") %}
+                                            {% for g_part in range(0, split_b|length) %}
+                                                {% if g_part % 2 == 0 %}
+                                                    <p style="display: inline;">{{ split_b[g_part] }}</p>
+                                                {% else %}
+                                                    <p style="display: inline;"><span
+                                                            style="font-weight: bold; background: rgba(80,80,80,0.66); padding: 1px 2px; border-radius: 2px;">{{ split_b[g_part] }}</span>
+                                                    </p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>{{ parts[i_part] }}</p>
+                                        {% endif %}
                                         </h5>
                                     {% endif %}
                                 {% endif %}

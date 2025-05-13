@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Фикс">
-      <change afterPath="$PROJECT_DIR$/static/img/PFAI-(4).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/PFAI_no_fonv3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/PFAI_no_fonv3_black.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/YandexGPT-lite_img.jpeg" afterDir="false" />
+    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Основа положена">
+      <change afterPath="$PROJECT_DIR$/Ai_models/llama.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ai_models/yandexgpt.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ai_models/yandexgpt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/YandexGPT-lite_img.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/chat_prew.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/PFAI/home_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/home_pfai.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/navbar_pfai.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/PFAI/new_chat_pfai.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PFAI/new_chat_pfai.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,41 +70,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Flask server.Flask (app.py).executor&quot;: &quot;Run&quot;,
-    &quot;Flask server.Flask (main_api.py).executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.chat_prew.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.error_not_money_in_api.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.home.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.home_PFAI.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.login_form.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.navbar_pfai.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.new_chat_pfai.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.tech_web_error_to_you.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.test.html.executor&quot;: &quot;Run&quot;,
-    &quot;Python.count_tokens_wtf.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generator_api_key.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_api (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.users.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.yandexgpt.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rvlen/PycharmProjects/Ai_site/static/img&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Flask server.Flask (app.py).executor": "Run",
+    "Flask server.Flask (main_api.py).executor": "Run",
+    "JavaScript Debug.chat_prew.html.executor": "Run",
+    "JavaScript Debug.error_not_money_in_api.html.executor": "Run",
+    "JavaScript Debug.home.html.executor": "Run",
+    "JavaScript Debug.home_PFAI.html.executor": "Run",
+    "JavaScript Debug.login_form.html.executor": "Run",
+    "JavaScript Debug.navbar_pfai.html.executor": "Run",
+    "JavaScript Debug.new_chat_pfai.html.executor": "Run",
+    "JavaScript Debug.tech_web_error_to_you.html.executor": "Run",
+    "JavaScript Debug.test.html.executor": "Run",
+    "Python.count_tokens_wtf.executor": "Run",
+    "Python.generator_api_key.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main_api (1).executor": "Run",
+    "Python.qwen_in_browser.executor": "Run",
+    "Python.users.executor": "Debug",
+    "Python.yandexgpt.executor": "Run",
+    "Python.yandexgpt_for_ui_chat.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/rvlen/PycharmProjects/Ai_site/static/img",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\rvlen\PycharmProjects\Ai_site\static\img" />
@@ -118,16 +120,56 @@
     </key>
   </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
-    <configuration name="error_not_money_in_api.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/error_not_money_in_api.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
     <configuration name="navbar_pfai.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/navbar_pfai.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="new_chat_pfai.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/new_chat_pfai.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="test.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/test.html" useBuiltInWebServerPort="true">
+    <configuration name="qwen_in_browser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Ai_site" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Ai_models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Ai_models/qwen_in_browser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="yandexgpt_for_ui_chat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Ai_site" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Ai_models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Ai_models/yandexgpt_for_ui_chat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Ai_site" type="Python.FlaskServer">
@@ -169,17 +211,17 @@
       <item itemvalue="Flask server.Ai_site" />
       <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="JavaScript Debug.navbar_pfai.html" />
-      <item itemvalue="JavaScript Debug.error_not_money_in_api.html" />
       <item itemvalue="JavaScript Debug.new_chat_pfai.html" />
-      <item itemvalue="JavaScript Debug.test.html" />
+      <item itemvalue="Python.qwen_in_browser" />
+      <item itemvalue="Python.yandexgpt_for_ui_chat" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Flask server.Flask (app.py)" />
+        <item itemvalue="Python.yandexgpt_for_ui_chat" />
+        <item itemvalue="Python.qwen_in_browser" />
         <item itemvalue="JavaScript Debug.navbar_pfai.html" />
         <item itemvalue="JavaScript Debug.new_chat_pfai.html" />
-        <item itemvalue="JavaScript Debug.test.html" />
-        <item itemvalue="JavaScript Debug.error_not_money_in_api.html" />
       </list>
     </recent_temporary>
   </component>
@@ -249,7 +291,8 @@
       <workItem from="1747048592803" duration="5072000" />
       <workItem from="1747065690101" duration="6000" />
       <workItem from="1747120158368" duration="7718000" />
-      <workItem from="1747130969310" duration="2060000" />
+      <workItem from="1747130969310" duration="10875000" />
+      <workItem from="1747149621573" duration="3255000" />
     </task>
     <task id="LOCAL-00001" summary="Add home and Yandex Music widget">
       <option name="closed" value="true" />
@@ -371,7 +414,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747054454562</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Основа положена">
+      <option name="closed" value="true" />
+      <created>1747133476659</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1747133476659</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,17 +486,20 @@
     <MESSAGE value="Фикс багов" />
     <MESSAGE value="Фикс багов, тестовый вид чатов" />
     <MESSAGE value="Фикс" />
-    <option name="LAST_COMMIT_MESSAGE" value="Фикс" />
+    <MESSAGE value="Основа положена" />
+    <option name="LAST_COMMIT_MESSAGE" value="Основа положена" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Ai_site$generator_api_key.coverage" NAME="generator_api_key Coverage Results" MODIFIED="1746256611265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
     <SUITE FILE_PATH="coverage/Ai_site$count_tokens_wtf.coverage" NAME="count_tokens_wtf Coverage Results" MODIFIED="1746330342659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main_api__1_.coverage" NAME="main_api (1) Coverage Results" MODIFIED="1746443790157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1747133324365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1747150045987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ai_site$yandexgpt.coverage" NAME="yandexgpt Coverage Results" MODIFIED="1745238886746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
+    <SUITE FILE_PATH="coverage/Ai_site$qwen_in_browser.coverage" NAME="qwen_in_browser Coverage Results" MODIFIED="1747151701392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1746250583721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
     <SUITE FILE_PATH="coverage/Ai_site$users.coverage" NAME="users Coverage Results" MODIFIED="1743344844714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
     <SUITE FILE_PATH="coverage/Ai_site$main.coverage" NAME="main Coverage Results" MODIFIED="1745314140874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Downloads/app" />
     <SUITE FILE_PATH="coverage/Ai_site$Flask__main_api_py_.coverage" NAME="Flask (main_api.py) Coverage Results" MODIFIED="1746256285306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Ai_site$yandexgpt_for_ui_chat.coverage" NAME="yandexgpt_for_ui_chat Coverage Results" MODIFIED="1747153146498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
   </component>
 </project>

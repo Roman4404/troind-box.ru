@@ -59,8 +59,10 @@
         <div class="scrollable-element" id="chats_history" style="max-height: 1000px;">
             {% for id in items %}
                 <div class="chats_visible">
+                    <img src="../../static/img/{{ items[id][1] }}_img.png" alt="" width="32" height="32" class="rounded-circle me-2" style="display: inline; margin-left: 5px">
+                    <h6 style="display: inline">{{ items[id][1] }}</h6>
                     <h6 style="color: #000000"><a class="plain-link"
-                                                  href="/pfai/chat/{{ id }}">{{ items[id] }}</a></h6>
+                                                  href="/pfai/chat/{{ id }}">{{ items[id][0] }}</a></h6>
                 </div>
             {% endfor %}
         </div>
