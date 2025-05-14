@@ -52,26 +52,26 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
         id_user = aboit_api_key.user_id
         user = db_sess.query(User).filter(User.id == id_user).first()
         count_tokens_user = int(user.count_tokes)
-        if count_tokens_user > -100:
+        if count_tokens_user > -10:
             flag, system_context, user_context = processing_message(request.messages)
             if flag:
                 if request.model == "YandexGPT-lite":
                     if count_tokens_user < 0:
-                        request.max_tokens = 100 + count_tokens_user
+                        request.max_tokens = 10 + count_tokens_user
                     final_message = str(yandexgptlite_requst(system_context, user_context, request.max_tokens,
                                                                 request.temperature))
-                    count_tokens_user -= count_tokens(final_message)
-                    count_tokens_user -= count_tokens(user_context)
+                    count_tokens_user -= count_tokens(final_message) * 0.0002
+                    count_tokens_user -= count_tokens(user_context) * 0.0002
                     user.count_tokes = count_tokens_user
                     db_sess.commit()
                     return {"message": final_message}
                 elif request.model == "Llama-8b":
                     if count_tokens_user < 0:
-                        request.max_tokens = 100 + count_tokens_user
+                        request.max_tokens = 10 + count_tokens_user
                     final_message = str(llama8b_requst(system_context, user_context, request.max_tokens,
                                                                 request.temperature))
-                    count_tokens_user -= count_tokens(final_message)
-                    count_tokens_user -= count_tokens(user_context)
+                    count_tokens_user -= count_tokens(final_message) * 0.0002
+                    count_tokens_user -= count_tokens(user_context) * 0.0002
                     user.count_tokes = count_tokens_user
                     db_sess.commit()
                     return {"message": final_message}

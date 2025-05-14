@@ -8,6 +8,7 @@ from forms.user import RegisterForm, LoginForm
 from data.users import User
 from data.chats import Chats
 from data.api_keys import API_keys
+from data.promocodes import Promocode
 from data import db_session
 from Ai_models.count_tokens_wtf import count_tokens
 from Ai_models.yandexgpt import yandexgptlite_requst
@@ -91,34 +92,71 @@ def register():
         return flask.redirect(f'/profile/{current_user.name}')
 
 
-@app.route('/profile/<idd>')
+@app.route('/profile/<idd>', methods=['GET', 'POST'])
 def profile_view(idd):
-    db_sess = db_session.create_session()
-    all_users = db_sess.query(User).all()
-    if current_user.is_authenticated:
-        if idd.isdigit() and current_user.id == int(idd):
-            find_user = False
-            for user in all_users:
-                if int(idd) == user.id:
-                    find_user = True
-                    break
-            if find_user:
-                api_key = db_sess.query(API_keys).filter(API_keys.user_id == int(idd)).first()
-                if api_key:
-                    ui_api_key = api_key.api_key
+    if flask.request.method == 'GET':
+        db_sess = db_session.create_session()
+        all_users = db_sess.query(User).all()
+        if current_user.is_authenticated:
+            if idd.isdigit() and current_user.id == int(idd):
+                find_user = False
+                for user in all_users:
+                    if int(idd) == user.id:
+                        find_user = True
+                        break
+                if find_user:
+                    api_key = db_sess.query(API_keys).filter(API_keys.user_id == int(idd)).first()
+                    if api_key:
+                        ui_api_key = api_key.api_key
+                    else:
+                        ui_api_key = ""
+                    db_sess.close()
+                    status_promo = flask.request.cookies.get("status_promo", "")
+                    resp = flask.make_response(flask.render_template('profile_info.html', name=current_user.name, count_tokens=user.count_tokes, user_api_key=ui_api_key, status_promo=status_promo))
+                    resp.set_cookie('status_promo', '', max_age=0)
+                    return resp
                 else:
-                    ui_api_key = ""
-                db_sess.close()
-                return flask.render_template('profile_info.html', name=current_user.name, count_tokens=user.count_tokes, user_api_key=ui_api_key)
+                    db_sess.close()
+                    return flask.render_template('error404.html')
             else:
                 db_sess.close()
                 return flask.render_template('error404.html')
         else:
             db_sess.close()
-            return flask.render_template('error404.html')
+            return flask.redirect('/login')
+    elif flask.request.method == 'POST':
+        promocode_ui = flask.request.form.get('inp_promo')
+        resp = flask.make_response(flask.redirect(f'/profile/{current_user.id}'))
+        resp.set_cookie('status_promo', check_promo(promocode_ui), max_age=60 * 60 * 24)
+        return resp
+
+
+def check_promo(promocode_ui):
+    db_sess = db_session.create_session()
+    promocode_db = db_sess.query(Promocode).filter(Promocode.promocode == promocode_ui).first()
+    result = 'error:'
+    if promocode_db:
+        if promocode_db.used_count > 0:
+            promocode_db.used_count -= 1
+            add_token_for_promo(promocode_db.action)
+            result = f'ok:{promocode_db.action}'
+        else:
+            result += 'Промокод уже неактивен'
     else:
-        db_sess.close()
-        return flask.redirect('/login')
+        result += 'Промокод не найден'
+    db_sess.commit()
+    db_sess.close()
+    return result
+
+
+
+def add_token_for_promo(action):
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).filter(User.id == current_user.id).first()
+    if action[0] == "+":
+        user.count_tokes += int(action[1:])
+    db_sess.commit()
+    db_sess.close()
 
 
 @app.route('/new_api_key')
@@ -143,6 +181,8 @@ def new_api_key():
         return flask.redirect(f'/profile/{current_user.id}')
     else:
         return flask.redirect('/')
+
+
 @app.route('/russian_memory')
 def Russian_Memory_view():
     return flask.render_template('russian_memory_view.html')

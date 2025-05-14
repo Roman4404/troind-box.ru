@@ -62,7 +62,7 @@
                                    placeholder="Запрос в {{ ai_name }}..."
                                    aria-label="Recipient's username"
                                    aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Send ^
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" disabled>Send ^
                             </button>
                         </div>
                     </form>
@@ -74,6 +74,7 @@
             const inp_req = document.getElementById('input_request');
             const form_input = document.getElementById('form_input');
             const img_ai = document.getElementById('img_ai');
+            const butt_req = document.getElementById('button-addon2')
             const screenWidth_request = window.innerWidth;
             if (screenWidth_request !== 2560) {
                 form_input.style["margin-left"] = (500 * (screenWidth_request / 2560)) - 330 + "px";
@@ -93,7 +94,15 @@
                     form_input.style["margin-left"] = "500px";
                 }
             });
-        </script>
+
+            inp_req.addEventListener('input', (event) => {
+                if (inp_req.value !== "") {
+                    butt_req.disabled = false;
+                } else {
+                    butt_req.disabled = true;
+                }
+            });
+    </script>
     {% endblock %}
     </div>
 </div>
