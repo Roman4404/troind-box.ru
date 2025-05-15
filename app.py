@@ -87,10 +87,10 @@ def register():
             db_sess.add(user)
             db_sess.commit()
             db_sess.close()
-            return flask.redirect(f'/profile/{user.name}')
+            return flask.redirect(f'/login')
         return flask.render_template('register.html', form=form)
     else:
-        return flask.redirect(f'/profile/{current_user.name}')
+        return flask.redirect(f'/profile/{current_user.id}')
 
 
 @app.route('/profile/<idd>', methods=['GET', 'POST'])
