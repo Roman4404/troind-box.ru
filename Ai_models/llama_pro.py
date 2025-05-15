@@ -8,7 +8,7 @@ def llama70b_requst(system_context, user_context, max_tokens, temperature):
     )
 
     response = client.chat.completions.create(
-        model=f"gpt://{YandexGPT_Lite_Folder_ID}/llama-pro/rc",
+        model=f"gpt://{YandexGPT_Lite_Folder_ID}/llama/latest",
         messages=[
            {"role": "assistant", "content": f"{system_context}"},
            {"role": "user", "content": f"{user_context}"}

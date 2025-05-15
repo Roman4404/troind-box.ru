@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="3">
-      <change afterPath="$PROJECT_DIR$/Ai_models/llama_pro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ai_models/llama.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ai_models/llama_lite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_api.py" afterDir="false" />
-    </list>
+    <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Llama-70b add" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -293,7 +288,7 @@
       <workItem from="1747233384911" duration="950000" />
       <workItem from="1747297101778" duration="8865000" />
       <workItem from="1747313078543" duration="260000" />
-      <workItem from="1747316935616" duration="4848000" />
+      <workItem from="1747316935616" duration="5196000" />
     </task>
     <task id="LOCAL-00001" summary="Add home and Yandex Music widget">
       <option name="closed" value="true" />
@@ -471,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747320539504</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Llama-70b add">
+      <option name="closed" value="true" />
+      <created>1747323791406</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1747323791406</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,13 +545,14 @@
     <MESSAGE value="1" />
     <MESSAGE value="2" />
     <MESSAGE value="3" />
-    <option name="LAST_COMMIT_MESSAGE" value="3" />
+    <MESSAGE value="Llama-70b add" />
+    <option name="LAST_COMMIT_MESSAGE" value="Llama-70b add" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Ai_site$generator_api_key.coverage" NAME="generator_api_key Coverage Results" MODIFIED="1746256611265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
     <SUITE FILE_PATH="coverage/Ai_site$count_tokens_wtf.coverage" NAME="count_tokens_wtf Coverage Results" MODIFIED="1746330342659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main_api__1_.coverage" NAME="main_api (1) Coverage Results" MODIFIED="1746443790157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1747319780293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Ai_site$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1747323691605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ai_site$yandexgpt.coverage" NAME="yandexgpt Coverage Results" MODIFIED="1745238886746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$qwen_in_browser.coverage" NAME="qwen_in_browser Coverage Results" MODIFIED="1747151701392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ai_models" />
     <SUITE FILE_PATH="coverage/Ai_site$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1746250583721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/API" />
