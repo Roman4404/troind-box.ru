@@ -1,6 +1,6 @@
 import json
 import openai
-
+import uvicorn
 from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -96,3 +96,5 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
             content={"message": "API key is invalid"},
         )
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

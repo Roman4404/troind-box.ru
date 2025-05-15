@@ -3,6 +3,7 @@ import os
 import json
 import requests
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from waitress import serve
 
 from forms.user import RegisterForm, LoginForm
 from data.users import User
@@ -347,4 +348,4 @@ def error404(error):
 
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
-    app.run()
+    serve(app, host='0.0.0.0', port=5000)
