@@ -12,7 +12,7 @@ from data.api_keys import API_keys
 from data.promocodes import Promocode
 from data import db_session
 from Ai_models.count_tokens_wtf import count_tokens
-from Ai_models.yandexgpt import yandexgptlite_requst
+from Ai_models.yandexgptlite import yandexgptlite_requst
 from API.generator_api_key import generate_api_key
 
 app = flask.Flask(__name__)

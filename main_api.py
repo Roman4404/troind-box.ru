@@ -10,9 +10,10 @@ from data import db_session
 from data.api_keys import API_keys
 from data.users import User
 
-from Ai_models.yandexgpt import yandexgptlite_requst
+from Ai_models.yandexgptlite import yandexgptlite_requst
 from Ai_models.llama_lite import llama8b_requst
 from Ai_models.llama_pro import llama70b_requst
+from Ai_models.yandexgptpro import yandexgptpro_requst
 
 
 db_session.global_init("db/users.db")
@@ -69,7 +70,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                 elif request.model == "Llama-8b":
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
-                    final_message = str(llama70b_requst(system_context, user_context, request.max_tokens,
+                    final_message = str(llama8b_requst(system_context, user_context, request.max_tokens,
                                                                 request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0002
                     count_tokens_user -= count_tokens(user_context) * 0.0002
@@ -79,7 +80,17 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                 elif request.model == "Llama-70b":
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
-                    final_message = str(llama8b_requst(system_context, user_context, request.max_tokens,
+                    final_message = str(llama70b_requst(system_context, user_context, request.max_tokens,
+                                                                request.temperature))
+                    count_tokens_user -= count_tokens(final_message) * 0.0012
+                    count_tokens_user -= count_tokens(user_context) * 0.0012
+                    user.count_tokes = count_tokens_user
+                    db_sess.commit()
+                    return {"message": final_message}
+                elif request.model == "YandexGPT-pro":
+                    if count_tokens_user < 0:
+                        request.max_tokens = 10 + count_tokens_user
+                    final_message = str(yandexgptpro_requst(system_context, user_context, request.max_tokens,
                                                                 request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0012
                     count_tokens_user -= count_tokens(user_context) * 0.0012
