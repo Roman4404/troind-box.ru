@@ -115,6 +115,7 @@ def profile_view(idd):
                     status_promo = flask.request.cookies.get("status_promo", "")
                     resp = flask.make_response(flask.render_template('profile_info.html', name=current_user.name, count_tokens=user.count_tokes, user_api_key=ui_api_key, status_promo=status_promo))
                     resp.set_cookie('status_promo', '', max_age=0)
+                    resp.set_cookie('wotk_to_request', '', max_age=0)
                     return resp
                 else:
                     db_sess.close()
@@ -129,25 +130,29 @@ def profile_view(idd):
         promocode_ui = flask.request.form.get('inp_promo')
         resp = flask.make_response(flask.redirect(f'/profile/{current_user.id}'))
         resp.set_cookie('status_promo', check_promo(promocode_ui), max_age=60 * 60 * 24)
+        resp.set_cookie('wotk_to_request', '0', max_age=60 * 60 * 24)
         return resp
 
 
 def check_promo(promocode_ui):
-    db_sess = db_session.create_session()
-    promocode_db = db_sess.query(Promocode).filter(Promocode.promocode == promocode_ui).first()
-    result = 'error:'
-    if promocode_db:
-        if promocode_db.used_count > 0:
-            promocode_db.used_count -= 1
-            add_token_for_promo(promocode_db.action)
-            result = f'ok:{promocode_db.action}'
+    if flask.request.cookies.get("wotk_to_request", "1") == "1":
+        db_sess = db_session.create_session()
+        promocode_db = db_sess.query(Promocode).filter(Promocode.promocode == promocode_ui).first()
+        result = 'error:'
+        if promocode_db:
+            if promocode_db.used_count > 0:
+                promocode_db.used_count -= 1
+                add_token_for_promo(promocode_db.action)
+                result = f'ok:{promocode_db.action}'
+            else:
+                result += 'Промокод уже неактивен'
         else:
-            result += 'Промокод уже неактивен'
+            result += 'Промокод не найден'
+        db_sess.commit()
+        db_sess.close()
+        return result
     else:
-        result += 'Промокод не найден'
-    db_sess.commit()
-    db_sess.close()
-    return result
+        return 'error:Soo many request'
 
 
 
