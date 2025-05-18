@@ -45,8 +45,10 @@ def logout():
 
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return flask.render_template('home.html')
+def hello_world():
+    resp = flask.make_response(flask.render_template('home.html'))
+    resp.set_cookie('work_to_request', '1', max_age=60 * 60 * 60 * 60 * 60)
+    return resp
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -115,7 +117,7 @@ def profile_view(idd):
                     status_promo = flask.request.cookies.get("status_promo", "")
                     resp = flask.make_response(flask.render_template('profile_info.html', name=current_user.name, count_tokens=user.count_tokes, user_api_key=ui_api_key, status_promo=status_promo))
                     resp.set_cookie('status_promo', '', max_age=0)
-                    resp.set_cookie('wotk_to_request', '', max_age=0)
+                    resp.set_cookie('work_to_request', '1', max_age=60 * 60 * 60 * 60 * 60)
                     return resp
                 else:
                     db_sess.close()
@@ -130,12 +132,12 @@ def profile_view(idd):
         promocode_ui = flask.request.form.get('inp_promo')
         resp = flask.make_response(flask.redirect(f'/profile/{current_user.id}'))
         resp.set_cookie('status_promo', check_promo(promocode_ui), max_age=60 * 60 * 24)
-        resp.set_cookie('wotk_to_request', '0', max_age=60 * 60 * 24)
+        resp.set_cookie('work_to_request', '0', max_age=60 * 60 * 60 * 60 * 60)
         return resp
 
 
 def check_promo(promocode_ui):
-    if flask.request.cookies.get("wotk_to_request", "1") == "1":
+    if flask.request.cookies.get("work_to_request", "1") == "1":
         db_sess = db_session.create_session()
         promocode_db = db_sess.query(Promocode).filter(Promocode.promocode == promocode_ui).first()
         result = 'error:'
@@ -201,7 +203,9 @@ def ai_platform():
 
 @app.route('/pfai')
 def pfai():
-    return flask.render_template('PFAI/home_pfai.html')
+    resp = flask.make_response(flask.render_template('PFAI/home_pfai.html'))
+    resp.set_cookie('work_to_request', '1', max_age=60 * 60 * 60 * 60 * 60)
+    return resp
 
 
 @app.route('/pfai/new_chat', methods=['POST', 'GET'])
