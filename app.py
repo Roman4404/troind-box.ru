@@ -154,7 +154,7 @@ def check_promo(promocode_ui):
         db_sess.close()
         return result
     else:
-        return 'error:Soo many request'
+        return 'error:Слишком много запросов'
 
 
 
