@@ -58,5 +58,6 @@ python main_api.py
 ```
 Всё готово!
 
-## Структура:
+app.py - Сайт
+main_api.py - API сайта
 
