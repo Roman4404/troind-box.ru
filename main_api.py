@@ -15,7 +15,6 @@ from Ai_models.llama_lite import llama8b_requst
 from Ai_models.llama_pro import llama70b_requst
 from Ai_models.yandexgptpro import yandexgptpro_requst
 
-
 db_session.global_init("db/users.db")
 app = FastAPI()
 
@@ -46,6 +45,7 @@ def processing_message(message: list) -> list:
 def read_root():
     return {"message": "Welcome, my API"}
 
+
 @app.get("/api/v0/{api_keys}")
 async def check_api_keys(api_keys: str, request: ChatRequest):
     db_sess = db_session.create_session()
@@ -61,7 +61,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
                     final_message = str(yandexgptlite_requst(system_context, user_context, request.max_tokens,
-                                                                request.temperature))
+                                                             request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0002
                     count_tokens_user -= count_tokens(user_context) * 0.0002
                     user.count_tokes = count_tokens_user
@@ -71,7 +71,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
                     final_message = str(llama8b_requst(system_context, user_context, request.max_tokens,
-                                                                request.temperature))
+                                                       request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0002
                     count_tokens_user -= count_tokens(user_context) * 0.0002
                     user.count_tokes = count_tokens_user
@@ -81,7 +81,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
                     final_message = str(llama70b_requst(system_context, user_context, request.max_tokens,
-                                                                request.temperature))
+                                                        request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0012
                     count_tokens_user -= count_tokens(user_context) * 0.0012
                     user.count_tokes = count_tokens_user
@@ -91,7 +91,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
                     if count_tokens_user < 0:
                         request.max_tokens = 10 + count_tokens_user
                     final_message = str(yandexgptpro_requst(system_context, user_context, request.max_tokens,
-                                                                request.temperature))
+                                                            request.temperature))
                     count_tokens_user -= count_tokens(final_message) * 0.0012
                     count_tokens_user -= count_tokens(user_context) * 0.0012
                     user.count_tokes = count_tokens_user
@@ -117,6 +117,7 @@ async def check_api_keys(api_keys: str, request: ChatRequest):
             status_code=404,
             content={"message": "API key is invalid"},
         )
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
