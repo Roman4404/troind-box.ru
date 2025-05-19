@@ -38,7 +38,7 @@ mkdir keys
 ```shell
 cd keys
 ```
-9.Создайте файл "ai.py" и поставьте значения с [сайта](http://51.250.34.28:5000/pfai/need/api_and_keys)
+9.Создайте файл "ai.py" и поставьте значения с http://51.250.34.28:5000/pfai/need/api_and_keys
 ```python
 YandexGPT_Lite_API = # API keys
 YandexGPT_Lite_Folder_ID = # Folder ID
@@ -48,7 +48,7 @@ YandexGPT_Lite_Folder_ID = # Folder ID
 cd ..
 cd ..
 ```
-11.Запустите "app.py" возьмите значения secret_key с [сайта](http://51.250.34.28:5000/pfai/need/api_and_keys)
+11.Запустите "app.py" возьмите значения secret_key с http://51.250.34.28:5000/pfai/need/api_and_keys
 ```shell
 SECRET_KEY=<secret_key с сайта> python app.py
 ```
