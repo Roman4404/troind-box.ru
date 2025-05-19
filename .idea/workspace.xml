@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="805ed8c8-97a7-4ee1-8cce-9360bc900397" name="Changes" comment="Add README.md">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +86,7 @@
     "Python.main (1).executor": "Run",
     "Python.main.executor": "Run",
     "Python.main_api (1).executor": "Run",
+    "Python.main_api.executor": "Run",
     "Python.qwen_in_browser.executor": "Run",
     "Python.users.executor": "Debug",
     "Python.yandexgpt.executor": "Run",
@@ -119,15 +118,39 @@
       <recent name="C:\Users\rvlen\PycharmProjects\Ai_site" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.qwen_in_browser">
+  <component name="RunManager" selected="Python.main_api">
     <configuration name="navbar_pfai.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/navbar_pfai.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="new_chat_pfai.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Ai_site/templates/PFAI/new_chat_pfai.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="main_api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Ai_site" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="qwen_in_browser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ai_site" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -150,6 +173,7 @@
     </configuration>
     <configuration name="yandexgpt_for_ui_chat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ai_site" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -186,31 +210,17 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
-      <module name="Ai_site" />
-      <option name="target" value="$PROJECT_DIR$/app.py" />
-      <option name="targetType" value="PATH" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="SECRET_KEY" value="test42" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
     <list>
+      <item itemvalue="Flask server.Ai_site" />
+      <item itemvalue="JavaScript Debug.navbar_pfai.html" />
+      <item itemvalue="JavaScript Debug.new_chat_pfai.html" />
+      <item itemvalue="Python.main_api" />
       <item itemvalue="Python.qwen_in_browser" />
       <item itemvalue="Python.yandexgpt_for_ui_chat" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_api" />
         <item itemvalue="Python.yandexgpt_for_ui_chat" />
         <item itemvalue="Python.qwen_in_browser" />
       </list>
@@ -293,6 +303,7 @@
       <workItem from="1747379985861" duration="2574000" />
       <workItem from="1747412474389" duration="825000" />
       <workItem from="1747571998596" duration="1335000" />
+      <workItem from="1747638325133" duration="1404000" />
     </task>
     <task id="LOCAL-00001" summary="Add home and Yandex Music widget">
       <option name="closed" value="true" />
@@ -534,7 +545,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747580846425</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="final commit">
+      <option name="closed" value="true" />
+      <created>1747581861483</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1747581861483</updated>
+    </task>
+    <task id="LOCAL-00032" summary="final2 commit">
+      <option name="closed" value="true" />
+      <created>1747581963003</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1747581963003</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,8 +599,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update login_form.html" />
-    <MESSAGE value="add yandexgpt" />
     <MESSAGE value="Добавил тестовый чат PFAI" />
     <MESSAGE value="Добавил анимацию печати" />
     <MESSAGE value="Улучшение проверки на авторизацию и удабное создание чата" />
@@ -597,6 +622,11 @@
     <MESSAGE value="test fix" />
     <MESSAGE value="врем" />
     <MESSAGE value="Add README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add README.md" />
+    <MESSAGE value="final commit" />
+    <MESSAGE value="final2 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="final2 commit" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Ai_site$main_api.coverage" NAME="main_api Coverage Results" MODIFIED="1747638770996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
